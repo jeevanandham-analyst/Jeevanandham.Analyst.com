@@ -1,0 +1,38 @@
+#Create Table 1
+create table Customer_Table(
+Customer_id int primary key,
+Customer_name varchar(30),
+);
+insert into Customer_Table values(1, 'Alice')
+insert into Customer_Table values(2, 'Bob')
+insert into Customer_Table values(3, 'Carol')
+
+#Create Table 2
+create table Orders_Table(
+Customer_id int primary key,
+Order_id int,
+Order_date date
+);
+Insert Into Orders_Table values(1, 101,'2019-09-01')
+Insert Into Orders_Table values(2, 102,'2019-09-02')
+Insert Into Orders_Table values(3, 103,'2019-09-03')
+
+select *from Customer_Table
+select *from Orders_Table
+ 
+#Change Table name
+USE master;
+GO
+EXEC sp_rename 'Customer_Table', 'Customer';
+
+USE master;
+GO
+EXEC sp_rename 'Orders_Table', 'Orders';
+
+#Inner Join
+select C.Customer_name,O.Order_id,O.Order_date from Customer as C
+INNER JOIN Orders as O
+ON C.Customer_id = O.Customer_id;
+
+select customer.Customer_name,Orders.Order_id,Orders.Order_date from Customer
+INNER JOIN Orders ON Customer.Customer_id = Orders.Customer_id;
